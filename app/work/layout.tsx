@@ -1,9 +1,7 @@
-import { unstable_ViewTransition as ViewTransition } from 'react';
-
 export default function WorkLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
-  return <ViewTransition>{children}</ViewTransition>;
+  return <>{children}</>;
 }
