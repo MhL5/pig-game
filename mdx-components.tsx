@@ -1,6 +1,7 @@
 import React, { ComponentProps, ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
 import { codeToHtml } from "shiki";
+import { cn } from "@/lib/utils";
 
 type ParagraphProps = ComponentPropsWithoutRef<"p">;
 type ListProps = ComponentPropsWithoutRef<"ul">;
@@ -11,37 +12,37 @@ type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
 const components = {
   h1: (props: ComponentProps<"h1">) => (
     <h1
-      className="mt-8 mb-4 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
+      className="mt-8 mb-7 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
       {...props}
     />
   ),
   h2: (props: ComponentProps<"h2">) => (
     <h2
-      className="mt-8 mb-4 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0"
+      className="mt-8 mb-7 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0"
       {...props}
     />
   ),
   h3: (props: ComponentProps<"h3">) => (
     <h3
-      className="mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight"
+      className="mt-8 mb-7 scroll-m-20 text-2xl font-semibold tracking-tight"
       {...props}
     />
   ),
   h4: (props: ComponentProps<"h4">) => (
     <h4
-      className="mt-8 mb-4 scroll-m-20 text-xl font-semibold tracking-tight"
+      className="mt-8 mb-7 scroll-m-20 text-xl font-semibold tracking-tight"
       {...props}
     />
   ),
   h5: (props: ComponentProps<"h5">) => (
     <h5
-      className="mt-8 mb-4 scroll-m-20 text-lg font-semibold tracking-tight"
+      className="mt-8 mb-7 scroll-m-20 text-lg font-semibold tracking-tight"
       {...props}
     />
   ),
   h6: (props: ComponentProps<"h6">) => (
     <h6
-      className="mt-8 mb-4 scroll-m-20 text-base font-semibold tracking-tight"
+      className="mt-8 mb-7 scroll-m-20 text-base font-semibold tracking-tight"
       {...props}
     />
   ),
@@ -58,14 +59,14 @@ const components = {
   li: (props: ListItemProps) => <li className="pl-1" {...props} />,
 
   em: (props: ComponentPropsWithoutRef<"em">) => (
-    <em className="font-medium" {...props} />
+    <em className="inline-block font-medium" {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
     <strong className="font-medium" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      "text-blue-500 hover:text-blue-700 dark:text-gray-400 hover:dark:text-gray-300 dark:underline dark:underline-offset-2 dark:decoration-gray-800";
+      "text-blue-500 hover:text-blue-700 dark:text-blue-700 dark:hover:text-blue-500 underline";
     if (href?.startsWith("/")) {
       return (
         <Link href={href} className={className} {...props}>
@@ -90,6 +91,17 @@ const components = {
       >
         {children}
       </a>
+    );
+  },
+  pre: ({ className, ...props }: ComponentPropsWithoutRef<"pre">) => {
+    return (
+      <pre
+        className={cn(
+          "overflow-x-auto rounded-sm bg-[#24292e] p-3 text-base",
+          className,
+        )}
+        {...props}
+      />
     );
   },
   code: async ({
@@ -117,7 +129,7 @@ const components = {
     return (
       <code
         {...props}
-        className="prose-code:after:content-none rounded-sm bg-gray-200 px-1 py-0.5 text-gray-800"
+        className="prose-code:after:content-none bg-secondary text-secondary-foreground rounded-sm px-1.5 py-0.5 tracking-wide"
       >
         {typeof children === "string" ? children.replaceAll("`", "") : children}
       </code>
@@ -145,7 +157,7 @@ const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="ml-[0.075em] border-l-3 border-gray-300 pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300"
+      className="border-muted text-muted-foreground ml-[0.075em] border-l-3 pl-4"
       {...props}
     />
   ),
