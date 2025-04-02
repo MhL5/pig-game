@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
 
-export default function Copy({ content }: { content: string }) {
+export default function CopyButton({ content }: { content: string }) {
   const [isCopied, setIsCopied] = useState(false);
 
   async function handleCopy() {
