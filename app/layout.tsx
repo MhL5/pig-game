@@ -1,8 +1,20 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, Space_Mono } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const sansFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+  weight: "400",
+});
+
+const monoFont = Space_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://leerob.com"),
@@ -23,7 +35,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body
+        className={`${sansFont.variable} ${monoFont.variable} font-regular tracking-wide antialiased`}
+      >
         <main className="mx-auto max-w-3xl space-y-3">{children}</main>
         <Footer />
       </body>

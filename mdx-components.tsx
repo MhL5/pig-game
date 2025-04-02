@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { ComponentProps, ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import { codeToHtml } from "shiki";
 
 const components = {
