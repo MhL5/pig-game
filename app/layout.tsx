@@ -22,14 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className}`}>
-      <body className="antialiased tracking-tight">
-        <div className="min-h-screen flex flex-col justify-between pt-0 md:pt-8 p-8 dark:bg-zinc-950 bg-white text-gray-900 dark:text-zinc-200">
-          <main className="max-w-[60ch] mx-auto w-full space-y-6">
-            {children}
-          </main>
-          <Footer />
-        </div>
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>
+        <main className="prose prose-headings:text-balance prose-blockquote:text-muted-foreground prose-blockquote:[quotes:none] prose-code:text-nowrap prose-code:rounded-lg prose-code:bg-primary prose-code:text-primary-foreground prose-code:px-2 prose-code:py-0.5 prose-code:before:content-none prose-code:after:content-none prose-pre:p-2 prose-pre:my-0 prose-pre:bg-[#24292e] mx-auto w-full max-w-4xl px-3">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
@@ -52,7 +50,7 @@ function Footer() {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 dark:text-gray-500 hover:text-blue-500 transition-colors duration-200"
+            className="text-gray-400 transition-colors duration-200 hover:text-blue-500 dark:text-gray-500"
           >
             {link.name}
           </a>
