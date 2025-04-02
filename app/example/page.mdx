@@ -1,176 +1,53 @@
-# On Developer Experience
+# Typography Component
 
-Developer Experience (DX) is about building products developers [_love_](/n/devtools) to use. I’ve officially been doing DX work since 2020, but it’s been something I’ve cared about my whole career.
+a simple component for defining Typography following tailwind css best practices.
+sad
 
-> **Note:** I gave this as a meetup talk in 2025. You can view the [recording here](https://www.youtube.com/watch?v=PfJMy0RxvaE).
-
-## 1. Documentation
-
-Docs make or break [developer products](/n/devtools).
-
-They must be high-quality and available everywhere: on your website, in their editor, and inside [AI chatbots](https://v0.dev/). Your goal is write content beginners can understand and experts appreciate.
-
-Great docs are a product themselves. They need constant updates and polish. New product features can’t ship without the reference docs.
-
-<br />
-**_Suggestions_**
-
-1. Ensure docs have many code examples you can copy/paste or [run](https://ui.shadcn.com/docs/v0).
-2. Optimize for skimming (good use of **bold**, _italic_, lists, headings, images, etc).
-3. With writing, be both precise and concise – avoid technical jargon and idioms.
-4. Keep the first-time experience simple and slowly reveal complexity.
-5. You should still document workarounds even if it’s a product gap.
-6. [Use AI](https://github.com/aidar-freeed/ai-codereviewer/blob/a9a064dfa1db8c83f40ef63f6e247fa09c935ed6/src/main.ts) to automate reviews on docs for spelling, grammar, and brevity.
-7. Make it easy for developers to leave feedback on docs (e.g. typos).
-8. Embed docs directly in the code for in-editor feedback (e.g. [JSDoc](https://v0.dev/chat/jsd-oc-explanation-bz59neoxb8v)).
-9. Add automated checks for broken links on git pushes ([example](https://github.com/vercel/next.js/tree/canary/.github/actions/validate-docs-links)).
-
-## 2. Community
-
-Building community is a long-term investment. It must be in your company DNA.
-
-It’s _not_ a collection of developers you are trying to sell your product to. It’s an [exchange](/n/moderation). They share bugs, _you fix them_. They submit pull requests, _you merge and encourage them_.
-
-This is how you understand what’s working (or not working) with your product. Their feedback shapes the product direction and roadmap.
-
-A community forms around a product when developers feel heard. They share their wins and frustrations, and you respond by improving the product or clarifying the docs. You must meet developers where they already are: GitHub, X, Reddit, Slack, or at meetups.
-
-**_Suggestions_**
-
-- You can’t spend too much time talking to developers in the community.
-- Make yourself accessible to answer questions (e.g. host an [AMA](https://x.com/leerob/status/1890405718227837261)).
-- Monitor feedback on social media to understand community sentiment.
-- Use a Slackbot to send realtime user feedback to product teams.
-- Invest in high-quality swag for your top community members.
-- Everybody loves stickers — and they’re pretty cheap — create a bunch!
-
-## 3. Education
-
-Education is the best form of [marketing](/n/developer-marketing), second only to customer testimonials.
-
-Good education not only shows people _how_ to use your product but _why_ it exists and _what_ they can accomplish with it. It’s part storytelling, part technical guide, part product demo.
-
-**_Suggestions_**
-
-- Build [demos](https://x.com/leerob/status/1874891166585651626) that show [real-world](https://x.com/leerob/status/1708280997488333078) usage of your product (not just hello world).
-- If you answer the same question multiple times, turn it into a guide.
-- You need both reference material (docs) and structured learning ([courses](https://nextjs.org/learn)).
-
-# A demo of `react-markdown`
-
-`react-markdown` is a markdown component for React.
-
-👉 Changes are re-rendered as you type.
-
-👈 Try writing some markdown on the left.
-
-## Overview
-
-- Follows [CommonMark](https://commonmark.org)
-- Optionally follows [GitHub Flavored Markdown](https://github.github.com/gfm/)
-- Renders actual React elements instead of using `dangerouslySetInnerHTML`
-- Lets you define your own components (to render `MyHeading` instead of `'h1'`)
-- Has a lot of plugins
-
-## Contents
-
-Here is an example of a plugin in action
-([`remark-toc`](https://github.com/remarkjs/remark-toc)).
-**This section is replaced by an actual table of contents**.
-
-## Syntax highlighting
-
-Here is an example of a plugin to highlight code:
-[`rehype-starry-night`](https://github.com/rehypejs/rehype-starry-night).
-
-````js
+```tsx
+import { cn } from "@/utils/cn";
+import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
-import ReactDom from "react-dom";
-import { MarkdownHooks } from "react-markdown";
-import rehypeStarryNight from "rehype-starry-night";
 
-const test = `i am so lonely`;
+const typographyVariants = cva("text-xl", {
+  variants: {
+    variant: {
+      h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
+      h2: "scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0",
+      h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
+      h4: "scroll-m-20 text-xl font-semibold tracking-tight",
+      p: "leading-7 [&:not(:first-child)]:mt-6",
+    },
+    affects: {
+      default: "",
+      lead: "text-xl text-muted-foreground",
+      large: "text-lg font-semibold",
+      small: "text-sm font-medium leading-none",
+      muted: "text-sm text-muted-foreground",
+      removePMargin: "[&:not(:first-child)]:mt-0",
+    },
+  },
+  defaultVariants: {
+    variant: "h1",
+    affects: "default",
+  },
+});
 
-const markdown = `
+export type TypographyProps = React.HTMLAttributes<HTMLHeadingElement> &
+  VariantProps<typeof typographyVariants>;
 
-# Your markdown here
-
-`;
-
-ReactDom.render(
-
-{" "}
-<MarkdownHooks rehypePlugins={[rehypeStarryNight]}>{markdown}</MarkdownHooks>, document.querySelector("#content")
-); ```
-
-Pretty neat, eh?
-
-## GitHub flavored markdown (GFM)
-
-For GFM, you can _also_ use a plugin:
-[`remark-gfm`](https://github.com/remarkjs/react-markdown#use).
-It adds support for GitHub-specific extensions to the language:
-tables, strikethrough, tasklists, and literal URLs.
-
-These features **do not work by default**.
-👆 Use the toggle above to add the plugin.
-
-|    Feature | Support              |
-| ---------: | :------------------- |
-| CommonMark | 100%                 |
-|        GFM | 100% w/ `remark-gfm` |
-
-~~strikethrough~~
-
-- [ ] task list
-- [x] checked item
-
-https://example.com
-
-## HTML in markdown
-
-⚠️ HTML in markdown is quite unsafe, but if you want to support it, you can
-use [`rehype-raw`](https://github.com/rehypejs/rehype-raw).
-You should probably combine it with
-[`rehype-sanitize`](https://github.com/rehypejs/rehype-sanitize).
-
-<blockquote>👆 Use the toggle above to add the plugin.</blockquote>
-
-## Components
-
-You can pass components to change things:
-
-```js
-import React from "react";
-import ReactDom from "react-dom";
-import Markdown from "react-markdown";
-import MyFancyRule from "./components/my-fancy-rule.js";
-
-const markdown = `
-# Your markdown here
-`;
-
-import { getPosts } from "@/lib/posts";
-import { Post } from "@/ui/post";
-
-export default async function Page() {
-  const posts = await getPosts();
+export default function Typography({
+  className,
+  variant,
+  affects,
+  ...props
+}: TypographyProps) {
+  const Comp = variant || "p";
 
   return (
-    <ul>
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
-    </ul>
+    <Comp
+      className={cn(typographyVariants({ variant, affects, className }))}
+      {...props}
+    />
   );
 }
-````
-
-## More info?
-
-Much more info is available in the
-[readme on GitHub](https://github.com/remarkjs/react-markdown)!
-
----
-
-A component by [Espen Hovlandsdal](https://espen.codes/)
+```
