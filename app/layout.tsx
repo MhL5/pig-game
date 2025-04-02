@@ -24,9 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <main className="prose prose-headings:text-balance prose-blockquote:text-muted-foreground prose-blockquote:[quotes:none] prose-code:text-nowrap prose-code:rounded-lg prose-code:bg-primary prose-code:text-primary-foreground prose-code:px-2 prose-code:py-0.5 prose-code:before:content-none prose-code:after:content-none prose-pre:p-2 prose-pre:my-0 prose-pre:bg-[#24292e] mx-auto w-full max-w-4xl px-3">
-          {children}
-        </main>
+        <main className="mx-auto max-w-3xl space-y-3">{children}</main>
         <Footer />
       </body>
     </html>
