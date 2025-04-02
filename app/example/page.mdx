@@ -25,21 +25,25 @@ Here is an example of a plugin in action
 Here is an example of a plugin to highlight code:
 [`rehype-starry-night`](https://github.com/rehypejs/rehype-starry-night).
 
-```js
+````js
 import React from "react";
 import ReactDom from "react-dom";
 import { MarkdownHooks } from "react-markdown";
 import rehypeStarryNight from "rehype-starry-night";
 
+const test = `i am so lonely`;
+
 const markdown = `
+
 # Your markdown here
+
 `;
 
 ReactDom.render(
-  <MarkdownHooks rehypePlugins={[rehypeStarryNight]}>{markdown}</MarkdownHooks>,
-  document.querySelector("#content")
-);
-```
+
+{" "}
+<MarkdownHooks rehypePlugins={[rehypeStarryNight]}>{markdown}</MarkdownHooks>, document.querySelector("#content")
+); ```
 
 Pretty neat, eh?
 
@@ -88,23 +92,21 @@ const markdown = `
 # Your markdown here
 `;
 
-ReactDom.render(
-  <Markdown
-    components={{
-      // Use h2s instead of h1s
-      h1: "h2",
-      // Use a component instead of hrs
-      hr(props) {
-        const { node, ...rest } = props;
-        return <MyFancyRule {...rest} />;
-      },
-    }}
-  >
-    {markdown}
-  </Markdown>,
-  document.querySelector("#content")
-);
-```
+import { getPosts } from "@/lib/posts";
+import { Post } from "@/ui/post";
+
+export default async function Page() {
+  const posts = await getPosts();
+
+  return (
+    <ul>
+      {posts.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
+    </ul>
+  );
+}
+````
 
 ## More info?
 
