@@ -1,5 +1,7 @@
+import CopyButton from "@/components/blocks/buttons/CopyButton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import * as React from "react";
 import { ComponentPropsWithoutRef } from "react";
 import { codeToHtml } from "shiki";
 
@@ -91,17 +93,28 @@ const components = {
       </a>
     );
   },
-  pre: ({ className, ...props }: ComponentPropsWithoutRef<"pre">) => {
+  pre: ({ children, className, ...props }: ComponentPropsWithoutRef<"pre">) => {
+    const codeSnippet = (
+      children as React.ReactNode & { props?: { children?: React.ReactNode } }
+    )?.props?.children;
+
+    const codeString = typeof codeSnippet === "string" ? codeSnippet : null;
     return (
       <pre
         className={cn(
-          "overflow-x-auto rounded-sm bg-[#24292e] p-3 text-base",
+          "relative overflow-x-auto rounded-sm bg-[#24292e] p-3 text-base",
           className,
         )}
         {...props}
-      />
+      >
+        {codeString && (
+          <CopyButton className="absolute top-3 right-3" content={codeString} />
+        )}
+        {children}
+      </pre>
     );
   },
+
   code: async ({
     children,
     className,
