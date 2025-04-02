@@ -1,62 +1,60 @@
-import React, { ComponentProps, ComponentPropsWithoutRef } from "react";
-import Link from "next/link";
-import { codeToHtml } from "shiki";
 import { cn } from "@/lib/utils";
-
-type ParagraphProps = ComponentPropsWithoutRef<"p">;
-type ListProps = ComponentPropsWithoutRef<"ul">;
-type ListItemProps = ComponentPropsWithoutRef<"li">;
-type AnchorProps = ComponentPropsWithoutRef<"a">;
-type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
+import Link from "next/link";
+import { ComponentProps, ComponentPropsWithoutRef } from "react";
+import { codeToHtml } from "shiki";
 
 const components = {
-  h1: (props: ComponentProps<"h1">) => (
+  h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
       className="mt-8 mb-7 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
       {...props}
     />
   ),
-  h2: (props: ComponentProps<"h2">) => (
+  h2: (props: ComponentPropsWithoutRef<"h2">) => (
     <h2
       className="mt-8 mb-7 scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0"
       {...props}
     />
   ),
-  h3: (props: ComponentProps<"h3">) => (
+  h3: (props: ComponentPropsWithoutRef<"h3">) => (
     <h3
       className="mt-8 mb-7 scroll-m-20 text-2xl font-semibold tracking-tight"
       {...props}
     />
   ),
-  h4: (props: ComponentProps<"h4">) => (
+  h4: (props: ComponentPropsWithoutRef<"h4">) => (
     <h4
       className="mt-8 mb-7 scroll-m-20 text-xl font-semibold tracking-tight"
       {...props}
     />
   ),
-  h5: (props: ComponentProps<"h5">) => (
+  h5: (props: ComponentPropsWithoutRef<"h5">) => (
     <h5
       className="mt-8 mb-7 scroll-m-20 text-lg font-semibold tracking-tight"
       {...props}
     />
   ),
-  h6: (props: ComponentProps<"h6">) => (
+  h6: (props: ComponentPropsWithoutRef<"h6">) => (
     <h6
       className="mt-8 mb-7 scroll-m-20 text-base font-semibold tracking-tight"
       {...props}
     />
   ),
 
-  p: (props: ParagraphProps) => <p className="leading-snug" {...props} />,
+  p: (props: ComponentPropsWithoutRef<"p">) => (
+    <p className="leading-snug" {...props} />
+  ),
 
   // lists
-  ol: (props: ListProps) => (
+  ol: (props: ComponentPropsWithoutRef<"ol">) => (
     <ol className="list-decimal space-y-2 pl-5" {...props} />
   ),
-  ul: (props: ListProps) => (
+  ul: (props: ComponentPropsWithoutRef<"ul">) => (
     <ul className="list-disc space-y-1 pl-5" {...props} />
   ),
-  li: (props: ListItemProps) => <li className="pl-1" {...props} />,
+  li: (props: ComponentPropsWithoutRef<"li">) => (
+    <li className="pl-1" {...props} />
+  ),
 
   em: (props: ComponentPropsWithoutRef<"em">) => (
     <em className="inline-block font-medium" {...props} />
@@ -64,7 +62,7 @@ const components = {
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
     <strong className="font-medium" {...props} />
   ),
-  a: ({ href, children, ...props }: AnchorProps) => {
+  a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
     const className =
       "text-blue-500 hover:text-blue-700 dark:text-blue-700 dark:hover:text-blue-500 underline";
     if (href?.startsWith("/")) {
@@ -121,7 +119,7 @@ const components = {
         <code
           dangerouslySetInnerHTML={{ __html: codeHTML }}
           {...props}
-          className={className}
+          className={cn("text-sm", className)}
         />
       );
     }
@@ -155,7 +153,7 @@ const components = {
       </tbody>
     </table>
   ),
-  blockquote: (props: BlockquoteProps) => (
+  blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote
       className="border-muted text-muted-foreground ml-[0.075em] border-l-3 pl-4"
       {...props}
