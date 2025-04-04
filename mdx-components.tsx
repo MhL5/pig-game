@@ -8,7 +8,7 @@ import { codeToHtml } from "shiki";
 const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
-      className="mt-8 mb-7 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
+      className="mt-8 mb-7 scroll-m-20 font-mono text-4xl font-extrabold tracking-tight lg:text-5xl"
       {...props}
     />
   ),
@@ -44,7 +44,7 @@ const components = {
   ),
 
   p: (props: ComponentPropsWithoutRef<"p">) => (
-    <p className="leading-snug" {...props} />
+    <p className="leading-7 [&:not(:first-child)]:mt-6" {...props} />
   ),
 
   // lists
