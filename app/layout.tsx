@@ -6,14 +6,14 @@ const sansFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-geist-sans",
   display: "swap",
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
 });
 
 const monoFont = Space_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
   display: "swap",
-  weight: "400",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Lee Robinson",
-    template: "%s | Lee Robinson",
+    default: "MhL",
+    template: "%s | MhL",
   },
-  description: "Frontend developer, optimist, community builder.",
+  description: "Enthusiast Frontend developer",
 };
 
 export default function RootLayout({
