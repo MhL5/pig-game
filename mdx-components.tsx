@@ -8,7 +8,7 @@ import { codeToHtml } from "shiki";
 const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
-      className="mt-8 mb-7 scroll-m-20 font-mono text-4xl font-extrabold tracking-tight lg:text-5xl"
+      className="mt-8 mb-7 scroll-m-20 font-mono text-4xl font-extrabold tracking-tight"
       {...props}
     />
   ),
